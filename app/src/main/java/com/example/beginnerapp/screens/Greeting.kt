@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.beginnerapp.navigation.Routes
-import kotlinx.serialization.Serializable
 
 
 @Composable

@@ -1,19 +1,17 @@
 package com.example.beginnerapp.screens
 
-import android.util.Log
+import ProductCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,9 +21,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.beginnerapp.model.Product
 import com.example.beginnerapp.viewmodels.ProductViewModel
 import com.example.beginnerapp.viewmodels.UiState
-import com.google.android.material.progressindicator.CircularProgressIndicator
 
 
 @Composable
@@ -57,7 +55,8 @@ fun Products(navController: NavHostController,viewModel: ProductViewModel = hilt
             is UiState.Success -> {
                 LazyColumn {
                     items(products ?: emptyList()) { product ->
-                        Text(text = product.name)
+                        //Text(text = product.name)
+                        ProductCard(product=product, onAddToCart =viewModel::onAddToCart)
                     }
                 }
             }
@@ -68,6 +67,7 @@ fun Products(navController: NavHostController,viewModel: ProductViewModel = hilt
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center
                 )
+
             }
         }
 

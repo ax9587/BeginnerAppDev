@@ -3,7 +3,9 @@ package com.example.beginnerapp.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.beginnerapp.model.Product
 import com.example.beginnerapp.network.dto.ProductsResponse
+import com.example.beginnerapp.network.dto.toProductModel
 import com.example.beginnerapp.network.service.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -16,14 +18,14 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel@Inject constructor(
     private val http: ApiService,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) : ViewModel(){
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Initial)
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-    private val _products = MutableStateFlow<List<ProductsResponse>>(emptyList())
-    val products: StateFlow<List<ProductsResponse>> = _products
+    private val _products = MutableStateFlow<List<Product>>(emptyList())
+    val products: StateFlow<List<Product>> = _products
 
     init{
         fetchProducts()
@@ -36,11 +38,17 @@ class ProductViewModel@Inject constructor(
                 val response = http.fetchProducts()
                 print("DEBUG-The ProductsAPIresponse:${response}")
                 _uiState.value = UiState.Success
-                _products.value = response
+                _products.value = response.map{
+                    p->p.toProductModel()
+                }
             } catch (e: Exception) {
                 _uiState.value = UiState.Error(e.message ?: "An unknown error occurred")
             }
         }
+    }
+
+    fun onAddToCart(product: Product){
+
     }
 }
 sealed class UiState {
