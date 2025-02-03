@@ -57,6 +57,7 @@ fun Products(navController: NavHostController,viewModel: ProductViewModel = hilt
                     items(products ?: emptyList()) { product ->
                         //Text(text = product.name)
                         ProductCard(product=product, onAddToCart =viewModel::onAddToCart)
+                        //:: function reference as lambda
                     }
                 }
             }

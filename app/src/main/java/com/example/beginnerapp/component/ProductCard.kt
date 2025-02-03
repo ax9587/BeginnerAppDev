@@ -20,6 +20,7 @@ import com.example.beginnerapp.model.Product
 fun ProductCard(
     product: Product,
     onAddToCart: (Product) -> Unit,
+    //function signature
     modifier: Modifier = Modifier
 ) {
     Card(
