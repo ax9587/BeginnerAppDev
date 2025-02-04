@@ -6,19 +6,35 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.beginnerapp.screens.Greeting
 import com.example.beginnerapp.screens.Login
-import com.example.beginnerapp.screens.Products
+import com.example.beginnerapp.screens.ProductsListScreen
+import com.example.beginnerapp.screens.ShoppingCartScreen
 
 @Composable
 fun NavGraph(navController:NavHostController){
-    NavHost(navController=navController, startDestination = Routes.Greeting.routes) {
+    NavHost(navController=navController, startDestination = Routes.ProductLists.routes) {
         composable(Routes.Greeting.routes){
             Greeting(navController)
         }
         composable(Routes.Login.routes){
             Login(navController)
         }
-        composable(Routes.Products.routes){
-            Products(navController)
+        composable(Routes.ProductLists.routes){
+            ProductsListScreen(
+                navController,
+                onCartClick = {
+                    navController.navigate((Routes.ShoppingCart.routes))
+                }
+            )
+        }
+        composable(Routes.ShoppingCart.routes){
+            ShoppingCartScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onCheckoutClick = {
+                    navController.navigate(Routes.Checkout.routes)
+                }
+            )
         }
 
     }

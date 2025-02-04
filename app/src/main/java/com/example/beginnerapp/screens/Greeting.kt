@@ -34,7 +34,7 @@ import com.example.beginnerapp.navigation.Routes
             }
             Button(onClick = {
                 println("Products Clicked")
-                navController.navigate(Routes.Products.routes)
+                navController.navigate(Routes.ProductLists.routes)
             }){
                 Text(
                     text = "Products"

@@ -3,6 +3,7 @@ package com.example.beginnerapp.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.beginnerapp.model.CartItem
 import com.example.beginnerapp.model.Product
 import com.example.beginnerapp.network.dto.ProductsResponse
 import com.example.beginnerapp.network.dto.toProductModel
