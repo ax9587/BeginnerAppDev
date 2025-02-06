@@ -87,6 +87,19 @@ private fun CartItemCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Text(
+                text = cartItem.product.name,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             // Product Image
             Image(
                 painter = rememberAsyncImagePainter(cartItem.product.imageUrl),
@@ -103,11 +116,7 @@ private fun CartItemCard(
             Column(
                 modifier = Modifier.weight(1f)
             ) {
-                Text(
-                    text = cartItem.product.name,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
-                )
+
                 Text(
                     text = "$${cartItem.product.price}",
                     style = MaterialTheme.typography.bodyLarge,

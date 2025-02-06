@@ -4,6 +4,7 @@ import com.example.beginnerapp.component.ProductCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -48,7 +49,11 @@ fun ProductsListScreen(navController: NavHostController,
                         BadgedBox(
                             badge = {
                                 if (uiStateCart.items.isNotEmpty()) {
-                                    Badge { Text(uiStateCart.items.size.toString()) }
+                                    Badge(
+                                        modifier = Modifier.offset(x = -10.dp, y = (-2).dp)
+                                    ) {
+                                        Text(uiStateCart.items.size.toString())
+                                    }
                                 }
                             }
                         ) {
@@ -83,7 +88,7 @@ fun ProductsListScreen(navController: NavHostController,
                     LazyColumn {
                         items(products ?: emptyList()) { product ->
                             //Text(text = product.name)
-                            ProductCard(product=product, onAddToCart =viewModel::onAddToCart)
+                            ProductCard(product=product, onAddToCart =viewModelCart::addToCart)
                             //:: function reference as lambda
                         }
                     }

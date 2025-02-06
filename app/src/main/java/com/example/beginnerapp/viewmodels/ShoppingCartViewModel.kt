@@ -44,12 +44,14 @@ class ShoppingCartViewModel @Inject constructor(
     }
 
     fun addToCart(product: Product, quantity: Int = 1) {
+        println("DEBUG-ADDTOCART")
         viewModelScope.launch {
             try {
                 cartRepository.addToCart(product, quantity)
                 val updatedItems = cartRepository.getCartItems()
                 updateCartState(updatedItems)
             } catch (e: Exception) {
+                println("ERROR:${e.message}")
                 _uiState.update {
                     it.copy(error = "Failed to add item to cart: ${e.message}")
                 }
