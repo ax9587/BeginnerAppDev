@@ -104,4 +104,7 @@ dependencies {
     val room_version = "2.6.1"
     implementation("androidx.room:room-ktx:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
+
+    //Stripe
+    implementation("com.stripe:stripe-android:21.4.1")
 }
